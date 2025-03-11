@@ -2,6 +2,7 @@ import streamlit as st
 
 # Title and Description
 
+st.set_page_config(page_title="Streamlit Website")
 st.title("Welcome to My Streamlit Website")
 st.subheader("A simple web app built with Streamlit")
 
