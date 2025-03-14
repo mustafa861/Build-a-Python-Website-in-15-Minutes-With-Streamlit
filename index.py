@@ -13,28 +13,28 @@ uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
 if uploaded_file is not None:
     try:
-        df = pd.read_csv(uploaded_file)
-        
-        st.subheader("Data Preview")
-        st.write(df.head())
+    df = pd.read_csv(uploaded_file)
 
-        st.subheader("Data Summary")
-        st.write(df.describe())
+    st.subheader("Data Preview")
+    st.write(df.head())
 
-        st.subheader("Filter Data")
-        column = df.columns.tolist()
-        selected_column = st.selectbox("Select column to filter by", column)
-        unique_values = df[selected_column].unique()
-        selected_value = st.selectbox("Select value", unique_values)
+    st.subheader("Data Summary")
+    st.write(df.describe())
 
-        filtered_df = df[df[selected_column] == selected_value]
-        st.write(filtered_df)
+    st.subheader("Filter Data")
+    column = df.columns.tolist()
+    selected_column = st.selectbox("Select column to filter by", column)
+    unique_values = df[selected_column].unique()
+    selected_value = st.selectbox("Select value", unique_values)
 
-        st.subheader("Plot Data")
-        x_column = st.selectbox("Select x-axis column", column, key="x_axis")
-        y_column = st.selectbox("Select y-axis column", column, key="y_axis")
+    filtered_df = df[df[selected_column] == selected_value]
+    st.write(filtered_df)
 
-        if st.button("Generate Plot"):
+    st.subheader("Plot Data")
+    x_column = st.selectbox("Select x-axis column", column, key="x_axis")
+    y_column = st.selectbox("Select y-axis column", column, key="y_axis")
+
+    if st.button("Generate Plot"):
             if not filtered_df.empty:
                 if x_column == y_column:
                     st.error("Please select different columns for x and y axes")
